@@ -1,6 +1,8 @@
 import {Component} from 'react'
 import {Switch, Route, Redirect} from 'react-router-dom'
+
 import ThemeContext from './contexts/ThemeContext'
+
 import './App.css'
 import Home from './components/Home'
 import Login from './components/Login'
@@ -13,7 +15,7 @@ import SavedVideos from './components/SavedVideos'
 // Replace your code here
 class App extends Component {
   state = {
-    isBrighterTheme: false,
+    isBrighterTheme: true,
   }
 
   changeTheme = () => {
@@ -34,7 +36,7 @@ class App extends Component {
           <Route exact path="/gaming" component={Gaming} />
           <Route exact path="/videos/:id" component={VideoItemDetails} />
           <Route exact path="/saved-videos" component={SavedVideos} />
-          <Route exact path="/not-found" component={NotFound} />
+          <Route path="/not-found" component={NotFound} />
           <Redirect to="/not-found" />
         </Switch>
       </ThemeContext.Provider>
