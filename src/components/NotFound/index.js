@@ -13,7 +13,7 @@ const NotFound = () => (
       const {isBrighterTheme} = value
       console.log('(NotFound)isBrighterTheme:', isBrighterTheme)
       return (
-        <NotFoundBg isBrighterTheme>
+        <NotFoundBg isBrighterTheme={isBrighterTheme}>
           <NotFoundImage
             alt="not-found"
             src={`${
@@ -22,8 +22,10 @@ const NotFound = () => (
                 : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-not-found-dark-theme-img.png'
             }`}
           />
-          <NotFoundHeading isBrighterTheme>Page Not Found</NotFoundHeading>
-          <NotFoundPara isBrighterTheme>
+          <NotFoundHeading isBrighterTheme={isBrighterTheme}>
+            Page Not Found
+          </NotFoundHeading>
+          <NotFoundPara isBrighterTheme={isBrighterTheme}>
             We are sorry, the page you requested could not be found
           </NotFoundPara>
         </NotFoundBg>
