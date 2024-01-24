@@ -16,7 +16,7 @@ export const LoginBg = styled.div`
 
 export const LoginCard = styled(LoginBg)`
   height: auto;
-  width: 50%;
+  width: 70%;
   margin: 20px;
   background-color: ${props => (props.isBrighterTheme ? '#fff' : '#0f0f0f')};
   justify-content: flex-start;
@@ -77,6 +77,10 @@ export const LoginButton = styled.button`
   color: #fff;
   padding: 10px;
   border-radius: 10px;
+  :hover {
+    transition: 0.2s;
+    background-color: #3b79a9;
+  }
 `
 
 export const ErrorMsg = styled.p`
