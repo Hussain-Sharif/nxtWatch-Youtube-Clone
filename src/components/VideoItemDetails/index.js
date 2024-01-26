@@ -8,6 +8,7 @@ import ThemeContext from '../../contexts/ThemeContext'
 import Video from '../Video'
 import ReactionSection from '../ReactionSection'
 import VideoChannelDescription from '../VideoChannelDescription'
+
 import {
   ApiFailureHead,
   ApiFailurePara,
@@ -29,12 +30,34 @@ const apiFetchingConstants = {
 class VideoItemDetails extends Component {
   state = {
     isApi: apiFetchingConstants.initial,
-    dataFetched: null,
+    fetchedData: null,
     trueIfLiked: null,
+    trueIfDisliked: null,
+    trueIfSaved: null,
   }
 
   componentDidMount() {
     this.getDetailedVideoApi()
+  }
+
+  likeIsSelected = () => {
+    this.setState(prev => ({
+      trueIfLiked: !prev.trueIfLiked,
+      trueIfDisliked: false,
+    }))
+  }
+
+  dislikeIsSelected = () => {
+    this.setState(prev => ({
+      trueIfDisliked: !prev.trueIfDisliked,
+      trueIfLiked: false,
+    }))
+  }
+
+  saveIsSelected = () => {
+    this.setState(prev => ({
+      trueIfSaved: !prev.trueIfSaved,
+    }))
   }
 
   getDetailedVideoApi = async () => {
@@ -44,10 +67,14 @@ class VideoItemDetails extends Component {
     const authToken = Cookies.get('jwt_token')
     // Getting params {id}
     const {match} = this.props
+    console.log('VideoItemDetails API CALL==>', {match, authToken})
+
     const {params} = match
     const id = params
+    console.log('VideoItemDetails API CALL==>id:', id.id)
+
     // Call API
-    const apiUrl = `https://apis.ccbp.in/videos/:${id}`
+    const apiUrl = `https://apis.ccbp.in/videos/${id.id}`
     const options = {
       method: 'GET',
       headers: {
@@ -55,10 +82,12 @@ class VideoItemDetails extends Component {
       },
     }
     const response = await fetch(apiUrl, options)
+    console.log('VideoItemDetails API CALL==>', {match, authToken, response})
 
     if (response.ok === true) {
       const fetchedData = await response.json()
       const updatedData = this.updatedFetchedData(fetchedData)
+      console.log('==> updatedData', {updatedData})
       this.setState({
         isApi: apiFetchingConstants.success,
         fetchedData: updatedData,
@@ -113,7 +142,7 @@ class VideoItemDetails extends Component {
   })
 
   getSuccessResponse = () => {
-    const {fetchedData, trueIfLiked} = this.state
+    const {fetchedData, trueIfLiked, trueIfDisliked, trueIfSaved} = this.state
     const {
       id,
       title,
@@ -145,9 +174,14 @@ class VideoItemDetails extends Component {
       <>
         <Video videoUrl={videoUrl} thumbnailUrl={thumbnailUrl} title={title} />
         <ReactionSection
+          likeIsSelected={this.likeIsSelected}
+          dislikeIsSelected={this.dislikeIsSelected}
+          saveIsSelected={this.saveIsSelected}
           publishedAt={formattedPublishedDate[1]}
           viewCount={viewCount}
           trueIfLiked={trueIfLiked}
+          trueIfDisliked={trueIfDisliked}
+          trueIfSaved={trueIfSaved}
           id={id}
         />
         <VideoChannelDescription channel={channel} description={description} />
@@ -178,7 +212,7 @@ class VideoItemDetails extends Component {
 
   render() {
     return (
-      <ThemeContext.Provider>
+      <ThemeContext.Consumer>
         {value => {
           const {isBrighterTheme} = value
 
@@ -193,7 +227,7 @@ class VideoItemDetails extends Component {
             </VideoDetailsBg>
           )
         }}
-      </ThemeContext.Provider>
+      </ThemeContext.Consumer>
     )
   }
 }
