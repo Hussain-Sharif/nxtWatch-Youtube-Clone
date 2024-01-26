@@ -125,6 +125,7 @@ class VideoItemDetails extends Component {
       description,
     } = fetchedData
 
+    // Formatting the Date from MM,D,YYYY to almost,over,about representing the Delta with respect to Current date
     const publishedDateJsFormatted = new Date(publishedAt)
     const publishedYear = publishedDateJsFormatted.getFullYear()
     const publishedDate = publishedDateJsFormatted.getDate()
