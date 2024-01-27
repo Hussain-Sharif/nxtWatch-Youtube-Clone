@@ -3,6 +3,7 @@ import {Switch, Route, Redirect} from 'react-router-dom'
 import styled from 'styled-components'
 
 import ThemeContext from './contexts/ThemeContext'
+import SavedVideosContext from './contexts/SavedVideosContext'
 
 import './App.css'
 import SideBar from './components/SideBar'
@@ -59,12 +60,37 @@ const SideBarSelectionAllDevices = styled.div`
   }
 `
 
+const listOfRoutes=[
+    {id:"home"},
+    {id:"trending"},
+    {id:"gaming"},
+    {id:"saved-videos"},
+]
+
 // Replace your code here
 class App extends Component {
   state = {
     isBrighterTheme: true,
     isSideBarOpened: false,
+    selectedRouteId:listOfRoutes[0].id
     // isItemSelected: listOfRoutes[0].id
+    listOfSavedVideos: [],
+  }
+
+  saveVideos = videoData => {
+    this.setState(prev => ({
+      listOfSavedVideos: [...prev.listOfSavedVideos, videoData],
+    }))
+  }
+
+  unSaveVideos = videoData => {
+    this.setState(prev => {
+      const {listOfSavedVideos} = prev
+      const updatedList = listOfSavedVideos.filter(
+        eachVideo => eachVideo.id !== videoData.id,
+      )
+      return {listOfSavedVideos: updatedList}
+    })
   }
 
   // NavToggling Functions<--
@@ -96,41 +122,49 @@ class App extends Component {
   }
 
   render() {
-    const {isBrighterTheme, isSideBarOpened} = this.state
-    console.log('In App.js=>', {isBrighterTheme})
+    const {isBrighterTheme, isSideBarOpened,selectedRouteId, listOfSavedVideos} = this.state
+    console.log('In App.js=>', {isBrighterTheme,selectedRouteId, listOfSavedVideos})
     return (
-      <ThemeContext.Provider
-        value={{isBrighterTheme, changeTheme: this.changeTheme}}
+      <SavedVideosContext.Provider
+        value={{
+          listOfSavedVideos,
+          saveVideos: this.saveVideos,
+          unSaveVideos: this.unSaveVideos,
+        }}
       >
-        <Header
-          isSideBarOpened={isSideBarOpened}
-          onClickToggleNavBar={this.onClickToggleNavBar}
-        />
-        <MainSection>
-          {isSideBarOpened ? (
-            <SideBarSelectionAllDevices>
-              {' '}
-              <SideBar isSideBarOpened={isSideBarOpened} />
-            </SideBarSelectionAllDevices>
-          ) : null}
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/trending" component={Trending} />
-            <Route exact path="/gaming" component={Gaming} />
-            <Route exact path="/videos/:id" component={VideoItemDetails} />
-            <Route exact path="/saved-videos" component={SavedVideos} />
-            <Route path="/not-found" component={NotFound} />
-            <Redirect to="/not-found" />
-          </Switch>
+        <ThemeContext.Provider
+          value={{isBrighterTheme, changeTheme: this.changeTheme}}
+        >
+          <Header
+            isSideBarOpened={isSideBarOpened}
+            onClickToggleNavBar={this.onClickToggleNavBar}
+          />
+          <MainSection>
+            {isSideBarOpened ? (
+              <SideBarSelectionAllDevices>
+                {' '}
+                <SideBar selectedRouteId={selectedRouteId} isSideBarOpened={isSideBarOpened} />
+              </SideBarSelectionAllDevices>
+            ) : null}
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/trending" component={Trending} />
+              <Route exact path="/gaming" component={Gaming} />
+              <Route exact path="/videos/:id" component={VideoItemDetails} />
+              <Route exact path="/saved-videos" component={SavedVideos} />
+              <Route path="/not-found" component={NotFound} />
+              <Redirect to="/not-found" />
+            </Switch>
 
-          {isSideBarOpened ? (
-            <FooterComponentSmallSelection>
-              <Footer />{' '}
-            </FooterComponentSmallSelection>
-          ) : null}
-        </MainSection>
-      </ThemeContext.Provider>
+            {isSideBarOpened ? (
+              <FooterComponentSmallSelection>
+                <Footer />{' '}
+              </FooterComponentSmallSelection>
+            ) : null}
+          </MainSection>
+        </ThemeContext.Provider>
+      </SavedVideosContext.Provider>
     )
   }
 }
