@@ -4,6 +4,7 @@ import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
+import SavedVideosContext from '../../contexts/SavedVideosContext'
 import ThemeContext from '../../contexts/ThemeContext'
 import Video from '../Video'
 import ReactionSection from '../ReactionSection'
@@ -51,12 +52,6 @@ class VideoItemDetails extends Component {
     this.setState(prev => ({
       trueIfDisliked: !prev.trueIfDisliked,
       trueIfLiked: false,
-    }))
-  }
-
-  saveIsSelected = () => {
-    this.setState(prev => ({
-      trueIfSaved: !prev.trueIfSaved,
     }))
   }
 
@@ -144,7 +139,6 @@ class VideoItemDetails extends Component {
   getSuccessResponse = () => {
     const {fetchedData, trueIfLiked, trueIfDisliked, trueIfSaved} = this.state
     const {
-      id,
       title,
       videoUrl,
       thumbnailUrl,
@@ -171,21 +165,51 @@ class VideoItemDetails extends Component {
     }
 
     return (
-      <>
-        <Video videoUrl={videoUrl} thumbnailUrl={thumbnailUrl} title={title} />
-        <ReactionSection
-          likeIsSelected={this.likeIsSelected}
-          dislikeIsSelected={this.dislikeIsSelected}
-          saveIsSelected={this.saveIsSelected}
-          publishedAt={formattedPublishedDate[1]}
-          viewCount={viewCount}
-          trueIfLiked={trueIfLiked}
-          trueIfDisliked={trueIfDisliked}
-          trueIfSaved={trueIfSaved}
-          id={id}
-        />
-        <VideoChannelDescription channel={channel} description={description} />
-      </>
+      <SavedVideosContext.Consumer>
+        {value => {
+          const {saveVideos, unSaveVideos} = value
+
+          const savingHandler = () => {
+            if (trueIfSaved) {
+              unSaveVideos(fetchedData)
+            } else {
+              saveVideos(fetchedData)
+            }
+          }
+
+          const saveIsSelected = () => {
+            this.setState(
+              prev => ({
+                trueIfSaved: !prev.trueIfSaved,
+              }),
+              savingHandler,
+            )
+          }
+          return (
+            <>
+              <Video
+                videoUrl={videoUrl}
+                thumbnailUrl={thumbnailUrl}
+                title={title}
+              />
+              <ReactionSection
+                likeIsSelected={this.likeIsSelected}
+                dislikeIsSelected={this.dislikeIsSelected}
+                saveIsSelected={saveIsSelected}
+                publishedAt={formattedPublishedDate[1]}
+                viewCount={viewCount}
+                trueIfLiked={trueIfLiked}
+                trueIfDisliked={trueIfDisliked}
+                trueIfSaved={trueIfSaved}
+              />
+              <VideoChannelDescription
+                channel={channel}
+                description={description}
+              />
+            </>
+          )
+        }}
+      </SavedVideosContext.Consumer>
     )
   }
 
