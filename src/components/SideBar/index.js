@@ -1,25 +1,21 @@
 import {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import ThemeContext from '../../contexts/ThemeContext'
+import SideBarItem from '../SideBarItem'
 import Footer from '../Footer'
 import {
   SideBarBg,
   SideBarLinks,
-  SideBarLink,
+  
   ComponentMediaSelection,
   SideBarNavItem,
-  NavigatingLink,
-  HomeIcon,
-  TrendingIcon,
-  GamingIcon,
-  SavedVideosIcon,
 } from './styledComponents'
 
 const listOfRoutes = [
-  {path: '/'},
-  {path: '/trending'},
-  {path: '/gaming'},
-  {path: '/saved-videos'},
+  {id: 'home', title: 'Home', icon: HomeIcon,path:"/"},
+  {id: 'trending',title:"Trending",icon:TrendingIcon,path:"/trending"},
+  {id: 'gaming',title:"Gaming",icon:GamingIcon,path:"/gaming"},
+  {id: 'saved-videos',title:"Saved videos",icon:SavedVideosIcon,path:"/saved-videos"},
 ]
 
 class SideBar extends Component {
@@ -29,8 +25,8 @@ class SideBar extends Component {
   //   }
 
   render() {
-    const {match} = this.props
-    console.log('<===-->||>>>>>>', match)
+    const {selectedRouteId} = this.props
+    console.log('<===-->||>>>>>>', {selectedRouteId})
     return (
       <ThemeContext.Consumer>
         {value => {
@@ -42,72 +38,8 @@ class SideBar extends Component {
           return (
             <SideBarBg isBrighterTheme={isBrighterTheme}>
               <SideBarLinks>
-                <NavigatingLink to="/">
-                  <SideBarLink
-                    isBrighterTheme={isBrighterTheme}
-                    isItemSelected={match.path === listOfRoutes[0].path}
-                    as="li"
-                  >
-                    <HomeIcon
-                      isItemSelected={match.path === listOfRoutes[0].path}
-                    />
-                    <SideBarNavItem isBrighterTheme={isBrighterTheme}>
-                      Home
-                    </SideBarNavItem>
-                  </SideBarLink>
-                </NavigatingLink>
-                <NavigatingLink
-                  //   onClick={this.changingSelectionItem}
-                  to="/trending"
-                >
-                  <SideBarLink
-                    isBrighterTheme={isBrighterTheme}
-                    isItemSelected={match.path === listOfRoutes[1].path}
-                    as="li"
-                  >
-                    <TrendingIcon
-                      isItemSelected={match.path === listOfRoutes[1].path}
-                    />
-                    <SideBarNavItem isBrighterTheme={isBrighterTheme}>
-                      Trending
-                    </SideBarNavItem>
-                  </SideBarLink>
-                </NavigatingLink>
-                <NavigatingLink
-                  //   onClick={this.changingSelectionItem}
-                  to="/gaming"
-                >
-                  <SideBarLink
-                    isBrighterTheme={isBrighterTheme}
-                    isItemSelected={match.path === listOfRoutes[2].path}
-                    as="li"
-                  >
-                    <GamingIcon
-                      isItemSelected={match.path === listOfRoutes[2].path}
-                    />
-                    <SideBarNavItem isBrighterTheme={isBrighterTheme}>
-                      Gaming
-                    </SideBarNavItem>
-                  </SideBarLink>
-                </NavigatingLink>
-                <NavigatingLink
-                  //   onClick={this.changingSelectionItem}
-                  to="/saved-videos"
-                >
-                  <SideBarLink
-                    isBrighterTheme={isBrighterTheme}
-                    isItemSelected={match.path === listOfRoutes[3].path}
-                    as="li"
-                  >
-                    <SavedVideosIcon
-                      isItemSelected={match.path === listOfRoutes[3].path}
-                    />
-                    <SideBarNavItem isBrighterTheme={isBrighterTheme}>
-                      Saved videos
-                    </SideBarNavItem>
-                  </SideBarLink>
-                </NavigatingLink>
-              </SideBarLinks>
+                {listOfRoutes.map(eachItem=>(<SideBarItem isBrighterTheme={isBrighterTheme} selectedRouteId={selectedRouteId} key={eachItem.id} eachItem={eachItem}/>))}
+                 </SideBarLinks>
               <ComponentMediaSelection>
                 <Footer />
               </ComponentMediaSelection>
