@@ -4,12 +4,14 @@ export const NotFoundBg = styled.div`
   background-color: ${props => (props.isBrighterTheme ? '#cbd5e1' : '#000')};
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+  width: 100vw;
+  height: 100vh;
 `
 
 export const NotFoundImage = styled.img`
-  max-width: 90px;
+  max-width: 180px;
 `
 
 export const NotFoundHeading = styled.h1`
