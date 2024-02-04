@@ -24,7 +24,7 @@ const VideoChannelDescription = props => {
               <ChannelName isBrighterTheme={isBrighterTheme}>
                 {name}
               </ChannelName>
-              <ChannelSubs>{subscriberCount}</ChannelSubs>
+              <ChannelSubs>{subscriberCount} Subscribers</ChannelSubs>
               <ChannelDescription isBrighterTheme={isBrighterTheme}>
                 {description}
               </ChannelDescription>
