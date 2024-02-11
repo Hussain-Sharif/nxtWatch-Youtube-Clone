@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {GoDotFill} from 'react-icons/go'
+import {BsDot} from 'react-icons/bs'
 
 import {
   NavigatingLink,
@@ -117,6 +117,6 @@ export const SavedVideoVewTimeItem = styled(VideoViewsAndTimeItem)`
   margin-left: 0;
 `
 
-export const SavedVideoDot = styled(GoDotFill)`
+export const SavedVideoDot = styled(BsDot)`
   margin-top: 5px;
 `

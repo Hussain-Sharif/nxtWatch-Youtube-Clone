@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import {GoDotFill} from 'react-icons/go'
+import {BsDot} from 'react-icons/bs'
 import {BiLike, BiDislike} from 'react-icons/bi'
-import {MdOutlinePlaylistAdd} from 'react-icons/md'
+import {MdPlaylistAdd} from 'react-icons/md'
 import {VideoBg} from '../Video/styledComponents'
 import {
   VideoViewsAndTimeContainer,
@@ -69,7 +69,7 @@ export const IconText = styled.p`
 `
 
 // Icons
-export const Dot = styled(GoDotFill)`
+export const Dot = styled(BsDot)`
   margin: 0;
   margin-top: 3px;
 `
@@ -92,7 +92,7 @@ export const DislikeIcon = styled(BiDislike)`
     font-size: 13px;
   }
 `
-export const SaveIcon = styled(MdOutlinePlaylistAdd)`
+export const SaveIcon = styled(MdPlaylistAdd)`
   margin-left: 5px;
   transition: 0.2s;
   font-size: 26px;

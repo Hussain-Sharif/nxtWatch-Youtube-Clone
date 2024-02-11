@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {BsFire} from 'react-icons/bs'
+import {AiFillFire} from 'react-icons/ai'
 import {HomeDisplay} from '../Home/styledComponents'
 
 export const SavedVideosBg = styled(HomeDisplay)`
@@ -34,7 +34,7 @@ export const SavedIconContainer = styled.div`
   }
 `
 
-export const SavedIcon = styled(BsFire)`
+export const SavedIcon = styled(AiFillFire)`
   font-size: 35px;
   color: red;
   @media screen and (max-width: 768px) {

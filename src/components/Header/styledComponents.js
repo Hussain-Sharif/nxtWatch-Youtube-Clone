@@ -3,9 +3,10 @@ import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
 
 import {Link} from 'react-router-dom'
-import {MdOutlineBrightness5, MdDarkMode} from 'react-icons/md'
+import {BsMoon, BsBrightnessHigh} from 'react-icons/bs'
 import {IoPersonCircle} from 'react-icons/io5'
-import {TbArticleFilledFilled, TbArticleOff} from 'react-icons/tb'
+// import {TbArticleFilledFilled, TbArticleOff} from 'react-icons/tb'
+import {RiSideBarFill, RiSideBarLine} from 'react-icons/ri'
 
 import styled from 'styled-components'
 
@@ -81,13 +82,13 @@ export const LogInOutButton = styled(ThemeButton)`
 
 // Icons<================
 
-export const DarkMoonIcon = styled(MdDarkMode)`
+export const DarkMoonIcon = styled(BsMoon)`
   font-size: 30px;
   @media screen and (max-width: 768px) {
     font-size: 25px;
   }
 `
-export const SideOpened = styled(TbArticleOff)`
+export const SideOpened = styled(RiSideBarLine)`
   color: ${props => (props.isBrighterTheme ? 'black' : 'white')};
   font-size: 30px;
 
@@ -95,7 +96,7 @@ export const SideOpened = styled(TbArticleOff)`
     font-size: 25px;
   }
 `
-export const SideClosed = styled(TbArticleFilledFilled)`
+export const SideClosed = styled(RiSideBarFill)`
   color: ${props => (props.isBrighterTheme ? 'black' : 'white')};
   font-size: 30px;
   @media screen and (max-width: 768px) {
@@ -103,7 +104,7 @@ export const SideClosed = styled(TbArticleFilledFilled)`
   }
 `
 
-export const BrightSunIcon = styled(MdOutlineBrightness5)`
+export const BrightSunIcon = styled(BsBrightnessHigh)`
   font-size: 30px;
   color: #fff;
   @media screen and (max-width: 768px) {

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import {MdOutlineCancel} from 'react-icons/md'
+// import {MdOutlineCancel} from 'react-icons/md'
+import {MdCancel} from 'react-icons/md'
 
 export const BannerDiv = styled.div`
   padding: 10px;
@@ -26,7 +27,7 @@ export const WebsiteLogo = styled.img`
   max-width: 150px;
   height: auto;
 `
-export const CloseIcon = styled(MdOutlineCancel)`
+export const CloseIcon = styled(MdCancel)`
   font-size: 20px;
 `
 

@@ -93,7 +93,7 @@ class VideoItemDetails extends Component {
   }
 
   searchOnClick = () => {
-    this.getApi()
+    this.getDetailedVideoApi()
   }
 
   getFailureResponse = isBrighterTheme => (

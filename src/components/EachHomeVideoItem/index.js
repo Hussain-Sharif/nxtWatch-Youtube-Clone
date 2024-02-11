@@ -1,4 +1,4 @@
-import {GoDotFill} from 'react-icons/go'
+import {BsDot} from 'react-icons/bs'
 import {formatDistanceToNow} from 'date-fns'
 import ThemeContext from '../../contexts/ThemeContext'
 
@@ -72,7 +72,7 @@ const EachHomeVideoItem = props => {
                     </VideoViewsAndTimeItem>
                     <VideoViewsAndTimeItem>
                       <VideoRandomText isBrighterTheme={isBrighterTheme}>
-                        <GoDotFill />
+                        <BsDot />
                       </VideoRandomText>
                     </VideoViewsAndTimeItem>
                     <VideoViewsAndTimeItem>

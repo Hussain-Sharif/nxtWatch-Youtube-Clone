@@ -1,8 +1,9 @@
 import {Link} from 'react-router-dom'
 import {AiFillHome, AiFillFire} from 'react-icons/ai'
 // import {BsFire} from 'react-icons/bs'
-import {PiGameControllerFill} from 'react-icons/pi'
-import {MdOutlinePlaylistAdd} from 'react-icons/md'
+// import {PiGameControllerFill} from 'react-icons/pi'
+import {GiGamepad} from 'react-icons/gi'
+import {MdPlaylistAdd} from 'react-icons/md'
 import styled from 'styled-components'
 
 export const HomeIcon = styled(AiFillHome)`
@@ -17,11 +18,11 @@ export const TrendingIcon = styled(AiFillFire)`
   font-size: 25px;
   color: ${props => (!props.isItemSelected ? '#606060' : 'red')};
 `
-export const GamingIcon = styled(PiGameControllerFill)`
+export const GamingIcon = styled(GiGamepad)`
   font-size: 25px;
   color: ${props => (!props.isItemSelected ? '#606060' : 'red')};
 `
-export const SavedVideosIcon = styled(MdOutlinePlaylistAdd)`
+export const SavedVideosIcon = styled(MdPlaylistAdd)`
   font-size: 25px;
   color: ${props => (!props.isItemSelected ? '#606060' : 'red')};
 `
