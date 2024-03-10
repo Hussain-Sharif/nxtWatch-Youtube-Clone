@@ -4,7 +4,6 @@ import 'reactjs-popup/dist/index.css'
 
 import {Link} from 'react-router-dom'
 import {BsMoon, BsBrightnessHigh} from 'react-icons/bs'
-import {IoPersonCircle} from 'react-icons/io5'
 // import {TbArticleFilledFilled, TbArticleOff} from 'react-icons/tb'
 import {RiSideBarFill, RiSideBarLine} from 'react-icons/ri'
 
@@ -111,12 +110,9 @@ export const BrightSunIcon = styled(BsBrightnessHigh)`
     font-size: 25px;
   }
 `
-export const ProfileIcon = styled(IoPersonCircle)`
-  font-size: 30px;
-  color: #396293;
-  @media screen and (max-width: 768px) {
-    font-size: 25px;
-  }
+export const ProfileIcon = styled.img`
+  max-height: 40px;
+  max-width: 40px;
 `
 export const PopupModuleContainer = styled(Popup)`
   background: transparent;

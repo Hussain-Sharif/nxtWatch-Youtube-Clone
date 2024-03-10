@@ -78,7 +78,11 @@ class Header extends Component {
           return (
             <HeaderBg isBrighterTheme={isBrighterTheme}>
               <div className="header-left-cont">
-                <ThemeButton type="button" onClick={onClickTogglingNav}>
+                <ThemeButton
+                  data-testid="theme"
+                  type="button"
+                  onClick={onClickTogglingNav}
+                >
                   {isSideBarOpened ? (
                     <SideOpened isBrighterTheme={isBrighterTheme} />
                   ) : (
@@ -87,7 +91,7 @@ class Header extends Component {
                 </ThemeButton>
                 <NavigatorLink to="/">
                   <WebsiteLogo
-                    alt="nxt watch logo"
+                    alt="website logo"
                     src={`${
                       isBrighterTheme
                         ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
@@ -104,7 +108,10 @@ class Header extends Component {
                 </HeaderItem>
                 <HeaderItem>
                   <AccountButton type="button">
-                    <ProfileIcon />
+                    <ProfileIcon
+                      src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
+                      alt="profile"
+                    />
                   </AccountButton>
                 </HeaderItem>
                 <HeaderItem>
